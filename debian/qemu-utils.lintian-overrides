@@ -1,0 +1,5 @@
+qemu-utils: copyright-without-copyright-notice
+qemu-utils: empty-binary-package
+qemu-utils: initial-upload-closes-no-bugs
+qemu-utils: no-manual-page
+qemu-utils: zero-byte-file-in-doc-directory

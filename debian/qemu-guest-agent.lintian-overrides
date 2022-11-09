@@ -1,0 +1,5 @@
+qemu-guest-agent: copyright-without-copyright-notice
+qemu-guest-agent: empty-binary-package
+qemu-guest-agent: initial-upload-closes-no-bugs
+qemu-guest-agent: no-manual-page
+qemu-guest-agent: zero-byte-file-in-doc-directory

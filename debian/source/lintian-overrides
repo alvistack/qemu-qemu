@@ -1,0 +1,8 @@
+qemu source: absolute-symbolic-link-target-in-source
+qemu source: file-without-copyright-information
+qemu source: no-debian-changes
+qemu source: not-binnmuable-any-depends-any
+qemu source: source-contains-prebuilt-windows-binary
+qemu source: source-is-missing
+qemu source: unpack-message-for-orig
+qemu source: version-substvar-for-external-package
