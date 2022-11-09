@@ -1,0 +1,6 @@
+usr/bin/elf2dmp
+usr/bin/qemu-edid
+usr/bin/qemu-img
+usr/bin/qemu-io
+usr/bin/qemu-keymap
+usr/bin/qemu-nbd

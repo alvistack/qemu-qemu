@@ -1,0 +1,11 @@
+*.substvars
+*debhelper*
+.debhelper
+autoreconf.*
+files
+qemu-guest-agent
+qemu-system
+qemu-system-common
+qemu-system-x86
+qemu-utils
+tmp

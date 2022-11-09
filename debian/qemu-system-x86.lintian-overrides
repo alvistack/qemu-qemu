@@ -1,0 +1,5 @@
+qemu-system-x86: copyright-without-copyright-notice
+qemu-system-x86: empty-binary-package
+qemu-system-x86: initial-upload-closes-no-bugs
+qemu-system-x86: no-manual-page
+qemu-system-x86: zero-byte-file-in-doc-directory

@@ -1,0 +1,9 @@
+usr/bin/qemu-pr-helper
+usr/bin/qemu-storage-daemon
+usr/include
+usr/lib/*/qemu/*.so
+usr/lib/qemu
+usr/share/applications
+usr/share/icons
+usr/share/locale
+usr/share/qemu

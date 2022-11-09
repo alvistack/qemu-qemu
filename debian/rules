@@ -1,0 +1,125 @@
+#!/usr/bin/make -f
+
+SHELL := /bin/bash
+
+override_dh_auto_configure:
+	set -ex && \
+		mkdir -p build && \
+		pushd build && \
+		../configure \
+			--extra-cflags="$(shell dpkg-buildflags --get CFLAGS)" \
+			--prefix=/usr \
+			--libdir=lib/$(DEB_HOST_MULTIARCH) \
+			--libexecdir=/usr/lib/qemu \
+			--localstatedir=/var \
+			--mandir=share/man \
+			--sysconfdir=/etc \
+			--target-list=x86_64-softmmu \
+			--with-git-submodules=ignore \
+			--with-default-devices \
+			--audio-drv-list=pa,alsa,oss,sdl \
+			--firmwarepath=/usr/share/qemu:/usr/share/seabios:/usr/lib/ipxe/qemu \
+			--disable-install-blobs \
+			--disable-strip \
+			--enable-alsa \
+			--enable-attr \
+			--enable-auth-pam \
+			--enable-avx2 \
+			--enable-bochs \
+			--enable-bpf \
+			--enable-brlapi \
+			--enable-bzip2 \
+			--enable-cap-ng \
+			--enable-capstone \
+			--enable-cloop \
+			--enable-coroutine-pool \
+			--enable-curl \
+			--enable-curses \
+			--enable-dmg \
+			--enable-fuse \
+			--enable-gettext \
+			--enable-gio \
+			--enable-gnutls \
+			--enable-gtk \
+			--enable-guest-agent \
+			--enable-iconv \
+			--enable-kvm \
+			--enable-l2tpv3 \
+			--enable-libdaxctl \
+			--enable-libiscsi \
+			--enable-libpmem \
+			--enable-libssh \
+			--enable-libudev \
+			--enable-libusb \
+			--enable-linux-aio \
+			--enable-linux-user \
+			--enable-live-block-migration \
+			--enable-lzo \
+			--enable-malloc-trim \
+			--enable-modules \
+			--enable-mpath \
+			--enable-multiprocess \
+			--enable-numa \
+			--enable-opengl \
+			--enable-oss \
+			--enable-pa \
+			--enable-parallels \
+			--enable-pie \
+			--enable-png \
+			--enable-pvrdma \
+			--enable-qcow1 \
+			--enable-qed \
+			--enable-qom-cast-debug \
+			--enable-rdma \
+			--enable-replication \
+			--enable-sdl \
+			--enable-seccomp \
+			--enable-selinux \
+			--enable-slirp-smbd \
+			--enable-slirp=system \
+			--enable-smartcard \
+			--enable-snappy \
+			--enable-system \
+			--enable-tcg \
+			--enable-tools \
+			--enable-tpm \
+			--enable-usb-redir \
+			--enable-vdi \
+			--enable-vhost-crypto \
+			--enable-vhost-kernel \
+			--enable-vhost-net \
+			--enable-vhost-user \
+			--enable-vhost-user-blk-server \
+			--enable-vhost-vdpa \
+			--enable-virtfs \
+			--enable-virtiofsd \
+			--enable-vnc \
+			--enable-vnc-jpeg \
+			--enable-vnc-sasl \
+			--enable-vte \
+			--enable-vvfat \
+			--enable-xkbcommon \
+			--enable-zstd && \
+		popd
+
+override_dh_auto_install:
+	dh_auto_install --destdir=debian/tmp
+	install -Dpm755 -d debian/tmp/usr/bin
+	pushd debian/tmp/usr/bin && \
+		ln -fs qemu-system-x86_64 kvm && \
+		popd
+	install -Dpm755 -d debian/tmp/etc/qemu
+	install -Dpm755 -d debian/tmp/lib/systemd/system
+	install -Dpm755 -d debian/tmp/usr/share/icons/hicolor/32x32/apps
+	install -Dpm755 -d debian/tmp/usr/share/icons/hicolor/scalable/apps
+	install -Dpm644 -t debian/tmp/etc/qemu scripts/qemu-guest-agent/fsfreeze-hook
+	install -Dpm644 -t debian/tmp/lib/systemd/system contrib/systemd/qemu-guest-agent.service
+	install -Dpm644 -t debian/tmp/usr/share/icons/hicolor/32x32/apps ui/icons/qemu_32x32.png
+	install -Dpm644 -t debian/tmp/usr/share/icons/hicolor/scalable/apps ui/icons/qemu.svg
+
+override_dh_auto_test:
+
+override_dh_auto_clean:
+
+%:
+	dh $@ --builddirectory=build

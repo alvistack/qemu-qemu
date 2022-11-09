@@ -1,0 +1,3 @@
+etc/qemu
+lib/systemd/system/qemu-guest-agent.service
+usr/bin/qemu-ga

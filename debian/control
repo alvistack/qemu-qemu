@@ -1,0 +1,164 @@
+Source: qemu
+Section: otherosfs
+Priority: optional
+Standards-Version: 4.5.0
+Maintainer: Wong Hoi Sing Edison <hswong3i@gmail.com>
+Homepage: https://github.com/qemu/qemu/tags
+Vcs-Browser: https://github.com/alvistack/qemu-qemu
+Vcs-Git: https://github.com/alvistack/qemu-qemu.git
+Build-Depends:
+ debhelper,
+ debhelper-compat (= 10),
+ fdupes,
+ gettext,
+ gnutls-dev,
+ libaio-dev,
+ libasound2-dev,
+ libbpf-dev,
+ libbrlapi-dev,
+ libbz2-dev,
+ libcacard-dev (>= 2.5.1),
+ libcap-ng-dev,
+ libcapstone-dev (>= 3.0.5),
+ libcurl4-gnutls-dev (>= 7.29.0),
+ libdaxctl-dev (>= 57),
+ libdrm-dev,
+ libepoxy-dev,
+ libfdt-dev (>= 1.4.2),
+ libfuse3-dev (>= 3.1),
+ libgbm-dev,
+ libglib2.0-dev (>= 2.56),
+ libgmp-dev,
+ libgtk-3-dev (>= 3.22.0),
+ libibumad-dev,
+ libibverbs-dev,
+ libiscsi-dev (>= 1.9.0),
+ libjpeg-dev,
+ liblzo2-dev,
+ libncurses-dev,
+ libncurses5-dev,
+ libncursesw5-dev,
+ libnuma-dev,
+ libpam0g-dev,
+ libpixman-1-dev (>= 0.21.8),
+ libpmem-dev,
+ libpng-dev (>= 1.6.34),
+ libpulse-dev,
+ librdmacm-dev,
+ libsasl2-dev,
+ libsdl2-dev,
+ libseccomp-dev (>= 2.3.0),
+ libselinux1-dev,
+ libslirp-dev (>= 4.1.0),
+ libsnappy-dev,
+ libssh-dev (>= 0.8.7),
+ libsystemd-dev,
+ libudev-dev,
+ libusb-1.0-0-dev (>= 1.0.13),
+ libusbredirparser-dev (>= 0.6),
+ libva-dev,
+ libvte-2.91-dev,
+ libzstd-dev (>= 1.4.0),
+ meson (>= 0.59.3),
+ multipath-tools,
+ ninja-build (>= 1.7),
+ python3-dev,
+ uuid-dev,
+ xfslibs-dev,
+ zlib1g-dev,
+
+Package: qemu-system
+Architecture: amd64
+Description: QEMU full system emulation binaries
+ This metapackage provides the full system emulation binaries for all supported
+ targets, by depending on all per-architecture system emulation packages which
+ QEMU supports.
+Depends:
+ ${misc:Depends},
+ qemu-system-x86,
+
+Package: qemu-system-common
+Architecture: amd64
+Description: QEMU full system emulation binaries (common files)
+ This package provides common files needed for target-specific
+ full system emulation (qemu-system-*) packages.
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Provides:
+ qemu-block-extra,
+ qemu-keymaps,
+ qemu-slof,
+ qemu-system-data,
+ qemu-system-gui,
+ sgabios,
+Replaces:
+ qemu-block-extra (<< ${source:Version}),
+ qemu-keymaps (<< ${source:Version}),
+ qemu-slof (<< ${source:Version}),
+ qemu-system-data (<< ${source:Version}),
+ qemu-system-gui (<< ${source:Version}),
+ qemu-utils (<< ${source:Version}),
+ sgabios (<< ${source:Version}),
+Breaks:
+ libvirt-daemon (<< 7.2.0),
+ qemu-block-extra (<< ${source:Version}),
+ qemu-keymaps (<< ${source:Version}),
+ qemu-slof (<< ${source:Version}),
+ qemu-system-data (<< ${source:Version}),
+ qemu-system-gui (<< ${source:Version}),
+ qemu-utils (<< ${source:Version}),
+ sgabios (<< ${source:Version}),
+
+Package: qemu-system-x86
+Architecture: amd64
+Description: QEMU full system emulation binaries (x86)
+ On x86 host hardware this package also enables KVM kernel virtual
+ machine usage on systems which supports it.
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ ipxe-qemu,
+ qemu-system-common (= ${source:Version}),
+ seabios,
+Recommends:
+ ovmf,
+ qemu-utils (= ${source:Version}),
+Suggests:
+ samba,
+ vde2,
+Provides:
+ qemu-kvm,
+Breaks:
+ qemu-kvm,
+Replaces:
+ qemu-kvm,
+
+Package: qemu-utils
+Architecture: amd64
+Description: QEMU utilities
+ This package provides QEMU related utilities:
+   - qemu-img: QEMU disk image utility
+   - qemu-io: QEMU disk exerciser
+   - qemu-nbd: QEMU disk network block device server
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+Breaks:
+ qemu-system-common (<< 3.1),
+Recommends:
+ qemu-block-extra (= ${source:Version}),
+Suggests:
+ debootstrap,
+
+Package: qemu-guest-agent
+Architecture: amd64
+Description: Guest-side qemu-system agent
+ Install this package on a system which is running as guest inside qemu
+ virtual machine. It is not used on the host.
+Pre-Depends:
+ ${misc:Pre-Depends},
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends},
+ lsb-base (>= 3.0-6),

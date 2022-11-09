@@ -1,0 +1,5 @@
+qemu-system-common: copyright-without-copyright-notice
+qemu-system-common: empty-binary-package
+qemu-system-common: initial-upload-closes-no-bugs
+qemu-system-common: no-manual-page
+qemu-system-common: zero-byte-file-in-doc-directory
